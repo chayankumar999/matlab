@@ -1,0 +1,93 @@
+#task1
+
+plot y=ar^n
+where a=2
+r given below
+
+
+n=1:1:20;
+subplot(2,2,1)
+a=2;
+r=0.8;
+y=a*r.^n;
+stem(n,y,'g')
+xlabel('n')
+ylabel('y(n)')
+title('y=ar^n where r=0.8 ');
+grid on
+
+subplot(2,2,2)
+a=2;
+r=1.2
+y=a*r.^n;
+stem(n,y,'r')
+xlabel('n')
+ylabel('y(n)')
+title('y=ar^n where r=1.2 ');
+grid on
+
+subplot(2,2,3)
+a=2;
+r=0.2
+y=a*r.^n;
+stem(n,y,'d')
+xlabel('n')
+ylabel('y(n)')
+title('y=ar^n where r=0.2 ');
+grid on
+
+subplot(2,2,4)
+a=2;
+r=5
+y=a*r.^n;
+stem(n,y,'b')
+xlabel('n')
+ylabel('y(n)')
+title('y=ar^n where r=5');
+grid on
+
+
+
+
+# task2
+
+plot the periodic sequence
+x[n] = {....5,4,3,2,1,5,4,3,2,1,5,4,3,2,1.....}
+for n=-10 to 9
+
+n=[-10:9];
+x=[5,4,3,2,1];
+p=4;
+xy=x'*ones(1,p);
+xy=(xy(:))'
+stem(n,xy,'g')
+xlabel('n')
+ylabel('x(n)')
+grid on
+
+
+# task 3
+
+plot the sequence ,
+x(n) ={0 -1 2 5 7 -4 3 -5 6 -2}
+y=x(n-2) and z(n) =x(n)+y(n)
+
+
+n=-4:5;
+x=[0,-1,2,5,7,-4,3,-5,6,-2]
+stem(n,x,'r*')
+hold on
+k=2;
+m=n+k;
+y=x;
+stem(m,y,'bd')
+hold on
+r=min(min(n),min(m)):max(max(n),max(m));
+z1=zeros(1,length(r));
+z1(find((r>=min(n)) & (r<=max(n))==1))
+
+
+
+
+
+

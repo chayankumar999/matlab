@@ -1,0 +1,73 @@
+1. consider a continuous time signal, x(t) = sin(2 pi 1000 t) +1 / 2 sin ( 2 pi 2000 t + 3 pi  / 4).
+ Determine sampled signal x ( n Ts) = x ( n ) , using matlab taking n = 8 samples at sampling rate , 
+Fs = 8000 Hz (sample / second ). The sampled signal  , x ( n ) = x ( n Ts ) = sin (2 pi 1000 n Ts ) + 1 / 2 sin (2 pi 2000 n Ts + 3 pi / 4 ) 
+where Ts = 1 / Fs = 1 / 8000 sec is the sampling period.
+
+Solution :
+
+x = [ 1 0 0 1 ] ;
+y = fft ( x ) ;
+subplot ( 2 , 1 , 1 )
+stem ( abs ( y ) ,  'k' )
+xlabel ( 'm' )
+ylabel ( 'X ( m ) ' )
+title ( ' Absolute value  of  DFT sequence ' )
+subplot ( 2 , 1 , 2 )
+stem ( angle ( y ) ,  ' k ' )
+xlabel ( ' m ' ) 
+ylabel ( ' Angle ( X ( m ) ) ' )
+title ( ' Angle value  of  DFT sequence ' )
+
+
+
+%DTFT on a 2D rectengular puls
+
+fs = 500 ;
+t = -1 : 1 / fs : 1 ; 
+x = rectpuls ( t , 0.12 ) ;
+subplot ( 2 , 2 , 1 )
+plot ( t , x )
+grid on
+y = fft ( x ) ;
+y = fftshift ( y ) ;
+subplot ( 2 , 2 , 2 )
+plot ( abs ( y ) )
+grid on
+
+x = rectpuls ( t , 0.02 ) ;
+subplot ( 2 , 2 ,3 )
+plot ( t , x )
+grid on
+y = fft ( x ) ;
+y = fftshift ( y ) ;
+subplot ( 2 , 2 , 4 )
+plot ( abs ( y ) )
+grid on
+
+
+
+%DTFT on a 3D rectengular puls
+
+x = zeros ( 32 ) ;
+x ( 12 : 17 ) = ones ( 6 , 1 ) ;
+subplot ( 2 , 2 ,1 )
+title ( ' 2D  rectengular puls ' )
+mesh ( x )
+x = fft ( x ) ;
+x = fftshift ( x ) ;
+subplot ( 2 , 2 , 2 )
+mesh ( abs ( x ) )
+title ( ' 2D  sinc in frequency domain ' )
+
+x = zeros ( 32 ) ;
+x ( 12 : 17 , 12 : 17 ) = ones ( 6 ) ;
+subplot ( 2 , 2 , 3)
+title ( ' 2D  rectengular puls ' )
+mesh ( x )
+x = fft2 ( x ) ;
+x = fftshift ( x ) ;
+subplot ( 2 , 2 , 4 )
+mesh ( abs ( x ) )
+title ( ' 3D  sinc in frequency domain ' )
+
+

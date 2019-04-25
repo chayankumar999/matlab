@@ -1,0 +1,69 @@
+1. Design and Simulator of different types of Infinite Impulse Response ( IIR ) Filters.
+
+% Design a 10th order bandpass butterworth filter with a passband from 100
+% to 200 Hz and plot both impulse response and frequency response.
+% Plot the impulse response and frequency response.
+% Consider 25 dB ripple in passband and 20 dB attenuation in stopband.
+
+
+Fs = 1000 ;                      % sampling frequency
+n = 10 ;                         % order of the filter
+Wn = [ 100 200 ] / 500 ;         % Normalized by Fs / 2
+[ b , a ] = butter ( n , Wn ) ;
+figure ( 1 )
+[ y , t ] = impz ( b , a , 101 ) % 101 samples of impulse response
+plot ( t , y )
+title ( ' Impulse Response ' )
+grid on
+freqz ( b , a , 512 , Fs )
+title ( ' Frequecy Response ' )
+
+Fs = 1000 ;
+n = 10 ; 
+Rp = 25 ;                        % Ripple parameter
+Wn = [ 100 200 ] / ( Fs / 2 ) ;
+[ b , a ] = cheby1 ( n , Rp, Wn ) ;
+[ y , t ] = impz ( b , a , 101 )
+figure ( 1 )
+plot ( t , y )
+grid on
+title ( ' Impulse Response ' )
+figure ( 2 )
+freqz ( b , a , 512 , Fs )
+title ( ' Frequecy Response ' )
+
+Fs = 1000 ;                      % sampling frequency
+n = 10 ; 
+Rp = 5 ; 
+Rs = 20 ;
+Wn = [ 100 200 ] / ( Fs / 2 ) ;
+[ b , a ] = ellip( n , Rp, Rs, Wn ) ;
+figure ( 1 )
+freqz ( b , a , 512 , Fs )       % 512 samples
+title ( ' Frequecy Response ' )
+figure ( 2 )
+[ y , t ] = impz ( b , a , 500 )
+plot ( t , y )
+grid on
+title ( ' Impulse Response of Elliptic filter' )
+
+
+t = 0 : 0.01 : 1 ;
+Fs = 1000 ;
+y = sin ( 8 * pi * t ) % Orignal signal
+yn = y + 0.5 * rand ( 1 , length ( t ) ) % Signal with noise
+subplot ( 2 , 2 , 1 )
+plot ( t , y , 'k' )
+title ( ' Orignal signal ' )
+subplot ( 2 , 2 , 2 )
+plot ( t , yn , 'r' )
+title ( ' Noisy Signal ' )
+[ b , a ] = butter ( 2 , 200 / Fs ) ;
+z = filter ( b , a , yn )
+subplot ( 2 , 2 , 3 )
+plot ( t , z , 'b' )
+title ( ' Filtered Signal ' )
+subplot ( 2 , 2 , 4 )
+plot ( t , y , 'm' , t , z , 'k' )
+title ( ' Comparison Original and Filtered Signal ' )
+
